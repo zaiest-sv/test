@@ -2,9 +2,12 @@ import { Component } from '@angular/core'
 import { RouterOutlet } from '@angular/router'
 
 @Component({
-  selector: 'app-root',
+  selector: 'app-other',
   standalone: true,
   imports: [RouterOutlet],
-  template: `<router-outlet />`,
+  templateUrl: './other.page.html',
+  styleUrl: './other.page.scss',
 })
-export class AppComponent {}
+export default class OtherPage {
+  title = 'other'
+}
