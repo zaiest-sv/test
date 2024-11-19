@@ -1,4 +1,4 @@
-import { Component } from '@angular/core'
+import { ChangeDetectionStrategy, Component } from '@angular/core'
 import { RouterOutlet } from '@angular/router'
 
 @Component({
@@ -6,5 +6,14 @@ import { RouterOutlet } from '@angular/router'
   standalone: true,
   imports: [RouterOutlet],
   template: `<router-outlet />`,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AppComponent {}
+export class AppComponent {
+  public readonly user = {
+    name: 'Jon',
+  }
+
+  getName() {
+    return this.user.name
+  }
+}
