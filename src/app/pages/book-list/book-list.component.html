@@ -1,0 +1,46 @@
+<div class="book-list">
+  <div class="book-list__toolbar">
+    <button mat-raised-button color="primary" (click)="openForm()">Add Book</button>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Search</mat-label>
+      <input
+        matInput
+        (input)="onSearch($event.target)"
+        placeholder="Search by title or author"
+      />
+    </mat-form-field>
+  </div>
+
+  <table mat-table [dataSource]="filteredBooks()" class="book-list__table">
+    <ng-container matColumnDef="title">
+      <th mat-header-cell *matHeaderCellDef> Title </th>
+      <td mat-cell *matCellDef="let book">
+        <button class="book-list__link" (click)="openDetails(book)">
+          {{ book.title }}
+        </button>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="author">
+      <th mat-header-cell *matHeaderCellDef> Author </th>
+      <td mat-cell *matCellDef="let book"> {{ book.author }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="year">
+      <th mat-header-cell *matHeaderCellDef> Year </th>
+      <td mat-cell *matCellDef="let book"> {{ book.year }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef> Actions </th>
+      <td mat-cell *matCellDef="let book">
+        <button mat-button color="accent" (click)="handleEdit(book, $event)">Edit</button>
+        <button mat-button color="warn" (click)="handleDelete(book.id, $event)">Delete</button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+</div>

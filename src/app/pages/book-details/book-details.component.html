@@ -1,0 +1,38 @@
+<mat-card class="book-details">
+
+  <section>
+    <mat-card-header>
+      <mat-card-title class="book-details__title">{{ data.book.title }}</mat-card-title>
+      <mat-card-subtitle class="book-details__subtitle">By {{ data.book.author }} ({{ data.book.year }})</mat-card-subtitle>
+    </mat-card-header>
+
+    @if (data.book.coverUrl) {
+      <div class="book-details__image-wrapper">
+        @if (!isImageLoaded) {
+          <div class="book-details__loader">
+            <mat-spinner diameter="48"></mat-spinner>
+          </div>
+        }
+
+        <img
+          mat-card-image
+          [src]="data.book.coverUrl"
+          alt="Book Cover"
+          class="book-details__cover"
+          (load)="onImageLoad()"
+          [class.book-details__cover--hidden]="!isImageLoaded"
+        />
+      </div>
+    }
+
+    <mat-card-content>
+      <p class="book-details__description">{{ data.book.description }}</p>
+    </mat-card-content>
+  </section>
+
+  <mat-card-actions class="book-details__actions">
+    <button mat-button mat-dialog-close>Close</button>
+    <button mat-button color="warn" (click)="deleteBook()">Delete</button>
+    <button mat-raised-button color="primary" (click)="openEdit()">Edit</button>
+  </mat-card-actions>
+</mat-card>

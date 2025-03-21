@@ -1,0 +1,42 @@
+<h2 mat-dialog-title class="book-form__title">
+  {{ form.value.id ? 'Edit Book' : 'Add Book' }}
+</h2>
+
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="book-form">
+  @for (field of fieldConfigs; track field.name) {
+    <div class="book-form__field">
+      <mat-form-field appearance="fill" class="book-form__mat-field">
+        <mat-label>{{ field.label }}</mat-label>
+
+        @if (!field['textarea']) {
+          <input
+            matInput
+            [type]="field.type!"
+            [formControlName]="field.name" />
+        } @else {
+          <textarea
+            matInput
+            [formControlName]="field.name"></textarea>
+        }
+      </mat-form-field>
+    </div>
+  }
+
+  <div class="book-form__actions">
+    <button
+      mat-button
+      mat-dialog-close
+      type="button"
+      class="book-form__button book-form__button--cancel">
+      Cancel
+    </button>
+    <button
+      mat-raised-button
+      color="primary"
+      type="submit"
+      [disabled]="form.invalid"
+      class="book-form__button">
+      Save
+    </button>
+  </div>
+</form>
